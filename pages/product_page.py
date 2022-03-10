@@ -33,7 +33,10 @@ class ProductPage(BasePage):
         assert self.is_element_present(*ProductPageLocators.PRODUCT_DESCRIPTION), "Product description is not presented"
     
     def should_be_message_about_adding(self):
-        assert self.is_element_present(*ProductPageLocators.SUCCESS_MESSAGE), "Message about adding product is not presented"
+        assert self.is_element_present(*ProductPageLocators.SUCCESS_MESSAGE), "Success message is not presented"
+    
+    def should_not_be_message_about_adding(self):
+        assert self.is_element_not_present(*ProductPageLocators.SUCCESS_MESSAGE), "Success message is presented, but should not be"
     
     def check_message_about_adding(self):
         msg_lst = self.browser.find_elements(*ProductPageLocators.SUCCESS_MESSAGE)
