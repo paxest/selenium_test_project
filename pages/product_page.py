@@ -14,7 +14,7 @@ class ProductPage(BasePage):
         add_product = self.browser.find_element(*ProductPageLocators.ADD_TO_BASKET_BUTTON)
         add_product.click()
         
-        self.solve_quiz_and_get_code()
+        # self.solve_quiz_and_get_code()
         self.should_be_message_about_adding()
         self.check_message_about_adding()
         

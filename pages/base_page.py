@@ -1,11 +1,8 @@
 import math
-from .locators import BasePageLocators
-from .locators import BasketPageLocators
-from selenium.common.exceptions import NoAlertPresentException
-from selenium.common.exceptions import NoSuchElementException
-from selenium.common.exceptions import TimeoutException
+from selenium.common.exceptions import NoAlertPresentException, NoSuchElementException, TimeoutException
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
+from .locators import BasePageLocators, BasketPageLocators
 
 
 class BasePage():
@@ -17,13 +14,16 @@ class BasePage():
     def open(self):
         self.browser.get(self.url)
     
-    def go_to_login_page(self):
-        link = self.browser.find_element(*BasePageLocators.LOGIN_LINK)
-        link.click()
-    
     def go_to_basket_page(self):
-        link = self.browser.find_element(*BasketPageLocators.BASKET_LINK)
-        link.click()
+        basket_link = self.browser.find_element(*BasketPageLocators.BASKET_LINK)
+        basket_link.click()
+    
+    def go_to_login_page(self):
+        login_link = self.browser.find_element(*BasePageLocators.LOGIN_LINK)
+        login_link.click()
+    
+    def should_be_authorized_user(self):
+        assert self.is_element_present(*BasePageLocators.USER_ICON), "User icon is not presented, probably unauthorised user"
     
     def should_be_login_link(self):
         assert self.is_element_present(*BasePageLocators.LOGIN_LINK), "Login link is not presented"
